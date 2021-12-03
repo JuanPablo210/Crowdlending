@@ -1,0 +1,47 @@
+<p>menu-delete works!</p>
+<div class="container">
+  <h3 mat-dialog-title>¿Estas seguro?</h3>
+  <div mat-dialog-content>
+    <ul class="clearfix">
+      <li>
+        <p><span class="font-weight-bold"> menu: </span>{{data.menu}}</p>
+      </li>
+      <li>
+        <p><span class="font-weight-bold"> titulo: </span>{{data.titulo}}</p>
+      </li>
+      <li>
+        <p><span class="font-weight-bold"> subtitulo: </span>{{data.subtitulo}}</p>
+      </li>
+      <li>
+        <p><span class="font-weight-bold"> habilitado: </span>{{data.habilitado}}</p>
+      </li>
+      <li>
+        <p><span class="font-weight-bold"> etiqueta: </span>{{data.etiqueta}}</p>
+      </li>
+      <li>
+        <p><span class="font-weight-bold"> url: </span>{{data.url}}</p>
+      </li>
+      <li>
+        <p><span class="font-weight-bold"> controller: </span>{{data.controller}}</p>
+      </li>
+      <li>
+        <p><span class="font-weight-bold"> controllerAs: </span>{{data.controllerAs}}</p>
+      </li>
+      <li>
+        <p><span class="font-weight-bold"> template: </span>{{data.template}}</p>
+      </li>
+      <li>
+        <p><span class="font-weight-bold"> sistema: </span>{{data.sistema}}</p>
+      </li>
+      <li>
+        <p><span class="font-weight-bold"> urlAjs: </span>{{data.urlAjs}}</p>
+      </li>
+    </ul>
+  </div>
+  <div mat-dialog-actions class="mb-1">
+    <button mat-flat-button color="warn" [mat-dialog-close]="1" (click)="confirmDelete()">
+      Eliminar
+    </button>
+    <button mat-flat-button (click)="onNoClick()" tabindex="-1">Cancelar</button>
+  </div>
+</div>

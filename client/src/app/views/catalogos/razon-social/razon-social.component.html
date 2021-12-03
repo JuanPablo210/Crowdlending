@@ -1,0 +1,102 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">Yo te presto</h4>
+            </li>
+            <li class="breadcrumb-item">
+              <a><i class="fas fa-home"></i> Registro</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="card pl-3 pr-3">
+      <div class="font-weight-bold p-t-5 p-l-10 font-17">Primeros pasos</div>
+      <div class="row">
+
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+          <div class="box-part text-center" (click)="simulador(!rows.informacionPerfilValidator)" style="cursor: pointer" [ngStyle]="rows.informacionPerfilValidator?{'background': '#116530', 'color': '#FFFFFF'}:{'background':'#0F2C67', 'color': '#FFFFFF'}">
+            <div class="title p-t-15">
+              <h3>Afiliación</h3>
+            </div>
+            <div class="p-b-10" [ngStyle]="rows.informacionPerfilValidator?{'color': '#9933FF'}:{'color': '#FFFFFF'}">
+            <span>
+              Se parte de nosotros
+            </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+          <div class="box-part text-center" (click)="addVerificacionIdentidad(!rows.verificacionIdentidadValidator)"
+               style="cursor: pointer"
+               [ngStyle]="rows.verificacionIdentidadValidator?{'background': '#116530', 'color': '#FFFFFF'}:{'background':'#0F2C67', 'color': '#FFFFFF'}">
+            <div class="title p-t-15">
+              <h3>Verificación de Identidad</h3>
+            </div>
+            <div class="p-b-10"
+                 [ngStyle]="rows.verificacionIdentidadValidator?{'color': '#9933FF'}:{'color': '#FFFFFF'}">
+            <span>
+              Carga tus documentos
+            </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card pl-3 pr-3">
+      <div class="font-weight-bold p-t-5 p-l-10 font-17">Tipos de prestamo</div>
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+          <div class="box-part text-center" (click)="Prestamo(!rows.informacionPrestamo)"
+               style="cursor: pointer"
+               [ngStyle]="rows.informacionPrestamo?{'background': '#116530', 'color': '#FFFFFF'}:{'background':'#0F2C67', 'color': '#FFFFFF'}">
+            <div class="title p-t-15">
+              <h3>Solicitar prestamo</h3>
+            </div>
+            <div class="p-b-10"
+                 [ngStyle]="rows.informacionPrestamo?{'color': '#9933FF'}:{'color': '#FFFFFF'}">
+            <span>
+              Solicitar prestamo
+            </span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+          <div class="box-part text-center" (click)="Prestar(!rows.informacionPrestar)" style="cursor: pointer"
+               [ngStyle]="rows.informacionPrestar?{'background': '#116530', 'color': '#FFFFFF'}:{'background':'#0F2C67', 'color': '#FFFFFF'}">
+            <div class="title p-t-15">
+              <h3>Prestar efectivo</h3>
+            </div>
+            <div class="p-b-10" [ngStyle]="rows.informacionPrestar?{'color': '#9933FF'}:{'color': '#FFFFFF'}">
+            <span>
+              Prestar efectivo
+            </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--      <div class="row clearfix">-->
+    <!--      <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">-->
+    <!--        <div class="box-part text-center">-->
+    <!--          <i class="fas fa-arrow-alt-circle-right fa-3x col-blue"></i>-->
+    <!--          <div class="title p-t-15">-->
+    <!--            <h3>Prestar efectivo</h3>-->
+    <!--          </div>-->
+    <!--          <div class="text p-b-10">-->
+    <!--            <span>continue con el registro para realizar prestamo</span>-->
+    <!--          </div>-->
+    <!--          <button mat-icon-button (click)="Prestar()">-->
+    <!--            <mat-icon>add_to_queue</mat-icon>-->
+    <!--          </button>-->
+    <!--        </div>-->
+    <!--      </div>-->
+    <!--    </div>-->
+
+  </div>
+</section>

@@ -1,0 +1,72 @@
+<p>menu-delete works!</p>
+<div class="container">
+  <h3 mat-dialog-title>¿Estas seguro?</h3>
+  <div mat-dialog-content>
+    <ul class="clearfix">
+      <li>
+        <p><span class="font-weight-bold"> Título: </span>{{data.titulo}}</p>
+      </li>
+      <li>
+      <li>
+        <p><span class="font-weight-bold"> Sub titulo : </span>{{data.subtitulo}}</p>
+      </li>
+      <li>
+        <p><span class="font-weight-bold"> Habilitado: </span>{{ data.habilitado }}</p>
+      </li>
+      <li>
+        <p><span class="font-weight-bold"> Templete: </span>{{data.templete}}</p>
+      </li>
+      <li>
+        <p>
+          <span class="font-weight-bold"> Sistema: </span>{{data.sistema}}
+        </p>
+      </li>
+      <li>
+        <p>
+          <span class="font-weight-bold"> Controller: </span>{{data.controllerAs}}
+        </p>
+      </li>
+      <li>
+        <p>
+          <span class="font-weight-bold"> Url: </span>{{data.url}}
+        </p>
+      </li>
+      <li>
+        <p>
+          <span class="font-weight-bold"> Subtitulo: </span>{{data.subtitulo}}
+        </p>
+      </li>
+      <li>
+        <p>
+          <span class="font-weight-bold"> Menú Id: </span>{{data.menu}}
+        </p>
+      </li>
+      <li>
+        <p>
+          <span class="font-weight-bold"> Url_ajs: </span>{{data.urlAjs}}
+        </p>
+      </li>
+      <li>
+        <p>
+          <span class="font-weight-bold"> Catalago: </span>{{data.esCatalogo}}
+        </p>
+      </li>
+      <li>
+        <p>
+          <span class="font-weight-bold"> Controller: </span>{{data.controller}}
+        </p>
+      </li>
+      <li>
+        <p>
+          <span class="font-weight-bold"> Etiqueta: </span>{{data.etiqueta}}
+        </p>
+      </li>
+    </ul>
+  </div>
+  <div mat-dialog-actions class="mb-1">
+    <button mat-flat-button color="warn" [mat-dialog-close]="1" (click)="confirmDelete()">
+      Eliminar
+    </button>
+    <button mat-flat-button (click)="onNoClick()" tabindex="-1">Cancelar</button>
+  </div>
+</div>

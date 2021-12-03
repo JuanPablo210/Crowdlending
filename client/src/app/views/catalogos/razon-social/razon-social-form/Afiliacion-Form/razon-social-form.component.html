@@ -1,0 +1,477 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <div class="modal-about">
+          <div class="font-weight-bold p-t-5 p-l-10 font-17">
+            Captura de datos</div>
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="_razonSocialForm" (ngSubmit)="submit">
+      <div class="body">
+        <mat-horizontal-stepper [linear]="isLinear" #stepper ngClass="{{ 'last-edited-step-' + stepper.selectedIndex }}" labelPosition="bottom">
+          <mat-step [stepControl]="_razonSocialForm">
+            <form [formGroup]="_razonSocialForm">
+              <ng-template matStepLabel>DATOS PERSONALES</ng-template>
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>ID</mat-label>
+                    <input matInput formControlName="id" readonly>
+                    <mat-icon matSuffix>turned_in_not</mat-icon>
+                    <mat-error *ngIf="_razonSocialForm.get('id').hasError('required')">
+                      El campo ID es requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput formControlName="nombre">
+                    <mat-icon matSuffix>library_books</mat-icon>
+                    <mat-error *ngIf="_razonSocialForm.get('nombre').hasError('required')">
+                      El campo Nombre es requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Apellido Paterno</mat-label>
+                    <input matInput formControlName="apellidoPaterno">
+                    <mat-icon matSuffix>library_books</mat-icon>
+                    <mat-error *ngIf="_razonSocialForm.get('apellidoPaterno').hasError('required')">
+                      El campo Apellido Paterno es requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Apellido Materno</mat-label>
+                    <input matInput formControlName="apellidoMaterno">
+                    <mat-icon matSuffix>library_books</mat-icon>
+                    <mat-error *ngIf="_razonSocialForm.get('apellidoMaterno').hasError('required')">
+                      El campo Apellido Materno es requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Fecha de nacimiento</mat-label>
+                    <input matInput [matDatepicker]="DatepickerInicial" name = "fechaNacimiento" formControlName="fechaNacimiento" >
+                    <mat-datepicker-toggle matSuffix [for]="DatepickerInicial"></mat-datepicker-toggle>
+                    <mat-datepicker #DatepickerInicial></mat-datepicker>
+                    <mat-error *ngIf="_razonSocialForm.get('fechaNacimiento').hasError('required')">
+                      Fecha Inicio Operaciones es requerida
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <mat-label>Genero</mat-label>
+                      <mat-select formControlName="sexo">
+                        <mat-option value="Hombre">Hombre</mat-option>
+                        <mat-option value="Mujer">Mujer</mat-option>
+                      </mat-select>
+                      <mat-error *ngIf="_razonSocialForm.get('sexo').hasError('required')">
+                        Genero es requerido
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <mat-form-field class="example-full-width" appearance="outline">
+                      <mat-label>Curp</mat-label>
+                      <input matInput formControlName="curp">
+                      <mat-icon matSuffix>library_books</mat-icon>
+                      <mat-error *ngIf="_razonSocialForm.get('curp').hasError('required')">
+                        El campo curp es requerido
+                      </mat-error>
+                    </mat-form-field>
+                  </div>
+                </div>
+
+              <div class="row">
+               <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                 <mat-form-field class="example-full-width" appearance="outline">
+                   <mat-label>Nivel Maximo De Estudio</mat-label>
+                   <input matInput formControlName="nivelMaximoDeEstudio">
+                   <mat-icon matSuffix>library_books</mat-icon>
+                   <mat-error *ngIf="_razonSocialForm.get('nivelMaximoDeEstudio').hasError('required')">
+                     El campo nivel Maximo De Estudio es requerido
+                   </mat-error>
+                 </mat-form-field>
+               </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                 <mat-form-field class="example-full-width" appearance="outline">
+                  <mat-label>Estado Civil</mat-label>
+                  <mat-select formControlName="estadoCivil">
+                    <mat-option value="Soltero">Soltero</mat-option>
+                    <mat-option value="casado">Casado</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="_razonSocialForm.get('estadoCivil').hasError('required')">
+                    Estado Civil es requerido
+                  </mat-error>
+                 </mat-form-field>
+               </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Nombre Empresa</mat-label>
+                    <input matInput formControlName="nombreEmpresa">
+                    <mat-icon matSuffix>library_books</mat-icon>
+                    <mat-error *ngIf="_razonSocialForm.get('nombreEmpresa').hasError('required')">
+                      El campo nombre Empresa es requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Puesto Actual</mat-label>
+                    <input matInput formControlName="puestoActual">
+                    <mat-icon matSuffix>library_books</mat-icon>
+                    <mat-error *ngIf="_razonSocialForm.get('puestoActual').hasError('required')">
+                      El campo puesto Actual es requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Rfc</mat-label>
+                    <input matInput formControlName="rfc">
+                    <mat-icon matSuffix>library_books</mat-icon>
+                    <mat-error *ngIf="_razonSocialForm.get('rfc').hasError('required')">
+                      El  Rfc es requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Situacion laboral</mat-label>
+                    <mat-select formControlName="estatus">
+                      <mat-option value=EMPLEADO>EMPLEADO</mat-option>
+                      <mat-option value="DESEMPLADO">DESEMPLADO</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="_razonSocialForm.get('estatus').hasError('required')">
+                      Situacion laboral es requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Calle</mat-label>
+                    <input matInput formControlName="calle">
+                    <mat-icon matSuffix>library_books</mat-icon>
+                    <mat-error *ngIf="_razonSocialForm.get('calle').hasError('required')">
+                      El  calle es requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>N. Exterior</mat-label>
+                    <input matInput formControlName="noExterior">
+                    <mat-icon matSuffix>library_books</mat-icon>
+                    <mat-error *ngIf="_razonSocialForm.get('noExterior').hasError('required')">
+                      El noExterior es requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>N.Interior</mat-label>
+                    <input matInput formControlName="noInterior">
+                    <mat-icon matSuffix>library_books</mat-icon>
+                    <mat-error *ngIf="_razonSocialForm.get('noInterior').hasError('required')">
+                      El noInterior es requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Colonia</mat-label>
+                    <input matInput formControlName="colonia">
+                    <mat-icon matSuffix>library_books</mat-icon>
+                    <mat-error *ngIf="_razonSocialForm.get('colonia').hasError('required')">
+                      El colonia es requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Codigo Postal</mat-label>
+                    <input matInput formControlName="codigoPostal">
+                    <mat-icon matSuffix>library_books</mat-icon>
+                    <mat-error *ngIf="_razonSocialForm.get('codigoPostal').hasError('required')">
+                      El codigoPostal es requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Localidad</mat-label>
+                    <input matInput formControlName="localidad">
+                    <mat-icon matSuffix>library_books</mat-icon>
+                    <mat-error *ngIf="_razonSocialForm.get('localidad').hasError('required')">
+                      El localidad es requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Municipio</mat-label>
+                    <input matInput formControlName="municipio">
+                    <mat-icon matSuffix>library_books</mat-icon>
+                    <mat-error *ngIf="_razonSocialForm.get('municipio').hasError('required')">
+                      El municipio es requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Estado</mat-label>
+                    <input matInput formControlName="estado">
+                    <mat-icon matSuffix>library_books</mat-icon>
+                    <mat-error *ngIf="_razonSocialForm.get('estado').hasError('required')">
+                      El estado es requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Pais</mat-label>
+                    <input matInput formControlName="pais">
+                    <mat-icon matSuffix>library_books</mat-icon>
+                    <mat-error *ngIf="_razonSocialForm.get('pais').hasError('required')">
+                      El pais es requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Telefono</mat-label>
+                    <input matInput formControlName="telefono">
+                    <mat-icon matSuffix>library_books</mat-icon>
+                    <mat-error *ngIf="_razonSocialForm.get('telefono').hasError('required')">
+                      El telefono es requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Correo</mat-label>
+                    <input matInput formControlName="email">
+                    <mat-icon matSuffix>library_books</mat-icon>
+                    <mat-error *ngIf="_razonSocialForm.get('email').hasError('required')">
+                      El correo es requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+            </form>
+          </mat-step>
+
+          <mat-step [stepControl]="_razonSocialForm">
+                <form [formGroup]="_razonSocialForm">
+                  <ng-template matStepLabel>GASTOS</ng-template>
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Alimentos Salud y Ropa</mat-label>
+                    <input matInput formControlName="alimentosSaludRopa">
+                    <mat-icon matSuffix>library_books</mat-icon>
+                    <mat-error *ngIf="_razonSocialForm.get('alimentosSaludRopa').hasError('required')">
+                      El Alimentos Salud y Ropa es requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Renta</mat-label>
+                    <input matInput formControlName="renta">
+                    <mat-icon matSuffix>library_books</mat-icon>
+                    <mat-error *ngIf="_razonSocialForm.get('renta').hasError('required')">
+                      El Renta es requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Tarjeta y Deudas</mat-label>
+                    <input matInput formControlName="tarjetaYdeudas">
+                    <mat-icon matSuffix>library_books</mat-icon>
+                    <mat-error *ngIf="_razonSocialForm.get('tarjetaYdeudas').hasError('required')">
+                      El Tarjeta y Deudas es requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Servicios </mat-label>
+                    <input matInput formControlName="servicios">
+                    <mat-icon matSuffix>library_books</mat-icon>
+                    <mat-error *ngIf="_razonSocialForm.get('servicios').hasError('required')">
+                      El Servicios  es requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Transportes y gasolina</mat-label>
+                    <input matInput formControlName="transportesYgasolina">
+                    <mat-icon matSuffix>library_books</mat-icon>
+                    <mat-error *ngIf="_razonSocialForm.get('transportesYgasolina').hasError('required')">
+                      El Transportes y gasolina es requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Educacion</mat-label>
+                    <input matInput formControlName="educacion">
+                    <mat-icon matSuffix>library_books</mat-icon>
+                    <mat-error *ngIf="_razonSocialForm.get('educacion').hasError('required')">
+                      El Educacion es requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Recreacion Personal</mat-label>
+                    <input matInput formControlName="recreacionPersonal">
+                    <mat-icon matSuffix>library_books</mat-icon>
+                    <mat-error *ngIf="_razonSocialForm.get('recreacionPersonal').hasError('required')">
+                      El Recreacion Personal es requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Seguros</mat-label>
+                    <input matInput formControlName="seguros">
+                    <mat-icon matSuffix>library_books</mat-icon>
+                    <mat-error *ngIf="_razonSocialForm.get('seguros').hasError('required')">
+                      El Seguros es requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                  <mat-form-field class="example-full-width" appearance="outline">
+                    <mat-label>Otros Gastos</mat-label>
+                    <input matInput formControlName="otrosGastos">
+                    <mat-icon matSuffix>library_books</mat-icon>
+                    <mat-error *ngIf="_razonSocialForm.get('otrosGastos').hasError('required')">
+                      El Otros Gastos es requerido
+                    </mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="row">
+                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+                    <div class="example-button-row">
+                      <button mat-raised-button color="primary" [type]="submit" [disabled]="_razonSocialForm.valid"
+                              [mat-dialog-close]="1" (click)="confirmAdd()">Guardar</button>
+                      <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">Cancelar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </mat-step>
+        </mat-horizontal-stepper>
+      </div>
+    </form>
+  </div>
+</div>

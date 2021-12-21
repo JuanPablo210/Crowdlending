@@ -1,18 +1,17 @@
 ---
 server:
-  servlet:
+  Servlet:
     session:
       cookie:
         http-only: true
         secure: true
-    contextPath: /ws_Crowdlending
-
+    context-path: /ws_Crowdlending
 
 ---
 grails:
   profile: angular
   codegen:
-    defaultPackage: mx.saccsa.Crowdlending
+    defaultPackage:  mx.saccsa.Crowdlending
   gorm:
     reactor:
       # Whether to translate GORM events into Reactor events
@@ -84,16 +83,17 @@ grails:
     cache:
       maxsize: 1000
   controllers:
-      upload:
-          maxFileSize: 80000000
-          maxRequestSize: 80000000
-      defaultScope: singleton
+    upload:
+      maxFileSize: 80000000
+      maxRequestSize: 80000000
+    defaultScope: singleton
   converters:
     encoding: UTF-8
-    views:
-      json:
-        generator:
-          dateformat: "yyyy-MM-dd"
+  views:
+    json:
+      generator:
+        dateFormat: "yyyy-MM-dd"
+
 ---
 grails:
   cors:
@@ -107,19 +107,21 @@ hibernate:
 dataSource:
   pooled: true
   jmxExport: true
+  #driverClassName: org.h2.Driver
   driverClassName: "com.microsoft.sqlserver.jdbc.SQLServerDriver"
-  dialect: org.hibernate.dialect.SQLServer2008Dialect
-
+  dialect: "org.hibernate.dialect.SQLServer2008Dialect"
 
 environments:
   development:
     dataSource:
       type: "com.zaxxer.hikari.HikariDataSource"
       dbCreate: update
+      #            url: "jdbc:sqlserver://66.226.77.243:1433;databaseName=INVERCO"
+      #            username: "sa"
+      #            password: "%%Saccsa_73%%"
       url: "jdbc:sqlserver://localhost:1433;databaseName=Crowdlending"
       username: "Saccsa"
       password: "sacsa"
-
   test:
     dataSource:
       dbCreate: update
@@ -132,4 +134,4 @@ environments:
 jasper:
   dir:
     reports: 'reports'
-    images: 'images/'
+  images: 'images/'

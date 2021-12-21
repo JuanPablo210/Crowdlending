@@ -1,0 +1,115 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <div class="modal-about">
+          <div class="font-weight-bold p-t-5 p-l-10 font-17">
+            {{dialogTitle}}</div>
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="_depositosForm" (ngSubmit)="submit">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Contrato</mat-label>
+            <mat-select formControlName="contrato">
+              <mat-option *ngFor="let item of contratoCombo"
+                          [value]="item.id">{{item.descripcion}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="_depositosForm.get('contrato').hasError('required')">
+              El campo Contrato es requerido
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Divisa</mat-label>
+            <mat-select formControlName="divisa">
+              <mat-option *ngFor="let item of divisaCombo"
+                          [value]="item.id">{{item.descripcion}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="_depositosForm.get('divisa').hasError('required')">
+              El campo divisa es requerido
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Concepto</mat-label>
+            <mat-select formControlName="subconcepto" (selectionChange)="cargarFormaLiquidacion($event.value)">
+              <mat-option *ngFor="let item of subconceptoCombo" [value]="item">{{item.descripcion}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="_depositosForm.get('subconcepto').hasError('required')">
+              Concepto es requerida
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Forma de Liquidación</mat-label>
+            <mat-select formControlName="formaLiquidacion">
+              <mat-option *ngFor="let item of formaLiquidacionCombo" [value]="item">{{item.descripcion}}</mat-option>
+            </mat-select>
+            <mat-error *ngIf="_depositosForm.get('formaLiquidacion').hasError('required')">
+              Forma de Liquidación es requerida
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Monto</mat-label>
+            <input matInput formControlName="monto" mask="separator" thousandSeparator=",">
+            <mat-error *ngIf="_depositosForm.get('monto').hasError('required')">
+              El campo monto es requerido
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>fechaOperacion</mat-label>
+            <input matInput [matDatepicker]="DatepickerInicial" name = "fechaOperacion" formControlName="fechaOperacion" readonly>
+            <mat-datepicker-toggle matSuffix [for]="DatepickerInicial"></mat-datepicker-toggle>
+            <mat-datepicker #DatepickerInicial></mat-datepicker>
+            <mat-error *ngIf="_depositosForm.get('fechaOperacion').hasError('required')">
+              El campo fechaOperacion es requerido
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>fechaLiquidacion</mat-label>
+            <input matInput [matDatepicker]="DatepickerFinal" name = "fechaLiquidacion" formControlName="fechaLiquidacion" readonly>
+            <mat-datepicker-toggle matSuffix [for]="DatepickerFinal"></mat-datepicker-toggle>
+            <mat-datepicker #DatepickerFinal></mat-datepicker>
+            <mat-error *ngIf="_depositosForm.get('fechaLiquidacion').hasError('required')">
+              El campo fechaLiquidacion es requerido
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!_depositosForm.valid"
+                    [mat-dialog-close]="1" (click)="confirmAdd()">Guardar
+            </button>
+            <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

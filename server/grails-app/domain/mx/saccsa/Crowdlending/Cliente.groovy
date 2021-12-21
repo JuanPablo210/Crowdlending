@@ -1,5 +1,7 @@
 package mx.saccsa.Crowdlending
 
+import mx.saccsa.security.Usuario
+
 
 class Cliente {
 
@@ -13,6 +15,7 @@ class Cliente {
     Boolean asignacionFlex=true
     String atencion
     Long comisionDeudor=0l
+    Usuario usuario
 //    Long contrato
 //    Cliente contratoCustodio
     Long claveBmv=0l
@@ -111,6 +114,7 @@ class Cliente {
         asignacionFlex nullable:true
         atencion nullable:true,blank:true
         comisionDeudor nullable:true
+        usuario nullable: false
 //        contratoCustodio nullable:true
         claveBmv nullable:true
         claveCustodia nullable:true
@@ -211,6 +215,7 @@ class Cliente {
         asignacionFlex name:'asignacionFlex', column:'asignacionFlex'
         atencion name:'atencion', column:'atencion'
         comisionDeudor name:'comisionDeudor', column:'comisionDeudor'
+        usuario name:'usuario', column:'usuario'
 //        contratoCustodio name:'contratoCustodio', column:'contratoCustodio'
         claveBmv name:'claveBmv', column:'claveBmv'
         claveCustodia name:'claveCustodia', column:'claveCustodia'
@@ -301,9 +306,11 @@ class Cliente {
 
     /* Agregado en Portafolios*/
     String toString() {
-        contrato + " " + nombreCorto
+//        contrato + " " + nombreCorto
+        nombreCorto
     }
 
     static transients = ['descLabel']
-    String getDescLabel(){  contrato + " " + nombreCorto }
+//    String getDescLabel(){  contrato + " " + nombreCorto }
+    String getDescLabel(){ nombreCorto }
 }

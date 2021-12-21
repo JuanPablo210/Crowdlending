@@ -27,21 +27,11 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatButtonModule} from '@angular/material/button';
 import {RazonSocialFormComponent} from './razon-social/razon-social-form/Afiliacion-Form/razon-social-form.component';
 
-import { UsuarioRoleComponent } from './usuario-role/usuario-role.component';
-import { UsuarioRoleFormComponent } from './usuario-role/usuario-role-form/usuario-role-form.component';
-import { UsuarioRoleDeleteComponent } from './usuario-role/usuario-role-delete/usuario-role-delete.component';
-import { RoleDetalleComponent } from './role-detalle/role-detalle.component';
-import { RoleDetalleFormComponent } from './role-detalle/role-detalle-form/role-detalle-form.component';
-import { RoleDetalleDeleteComponent } from './role-detalle/role-detalle-delete/role-detalle-delete.component';
-import { RoleComponent } from './role/role.component';
-import { RoleFormComponent } from './role/role-form/role-form.component';
-import { RoleDeleteComponent } from './role/role-delete/role-delete.component';
+
 import { UsuarioComponent } from './usuario/usuario.component';
 import { UsuarioFormComponent } from './usuario/usuario-form/usuario-form.component';
 import { UsuarioDeleteComponent } from './usuario/usuario-delete/usuario-delete.component';
-import { SubmenuComponent } from './submenu/submenu.component';
-import { SubmenuFormComponent } from './submenu/submenu-form/submenu-form.component';
-import { SubmenuDeleteComponent } from './submenu/submenu-delete/submenu-delete.component';
+
 import { MenuComponent } from './menu/menu.component';
 import { MenuFormComponent } from './menu/menu-form/menu-form.component';
 import { MenuDeleteComponent } from './menu/menu-delete/menu-delete.component';
@@ -49,35 +39,37 @@ import { MenuDeleteComponent } from './menu/menu-delete/menu-delete.component';
 import {VerificacionIdentidadFormComponent} from "./razon-social/verificacion-identidad/verificacion-identidad-form/verificacion-identidad-form.component";
 import {VerificacionIdentidadDetailComponent} from "./razon-social/verificacion-identidad/verificacion-identidad-detail/verificacion-identidad-detail.component";
 import { AfiliacionDetailComponent } from './razon-social/razon-social-form/afiliacion-detail/afiliacion-detail.component';
+import {MainComponent} from "./main/main.component";
+import {NgApexchartsModule} from "ng-apexcharts";
+import {ChartsModule} from "ng2-charts";
+import { DivisaComponent } from './divisa/divisa.component';
+import {DivisaFormComponent} from "./divisa/divisa-form/divisa-form.component";
+import {DivisaDeleteComponent} from "./divisa/divisa-delete/divisa-delete.component";
+
 
 
 @NgModule({
   declarations: [RazonSocialComponent, RazonSocialFormComponent,
 
-    UsuarioRoleComponent,
-    UsuarioRoleFormComponent,
-    UsuarioRoleDeleteComponent,
-    RoleDetalleComponent,
-    RoleDetalleFormComponent,
-    RoleDetalleDeleteComponent,
-    RoleComponent,
-    RoleFormComponent,
-    RoleDeleteComponent,
+
     UsuarioComponent,
     UsuarioFormComponent,
     UsuarioDeleteComponent,
-    SubmenuComponent,
-    SubmenuFormComponent,
-    SubmenuDeleteComponent,
+
     MenuComponent,
     MenuFormComponent,
     MenuDeleteComponent,
+    MainComponent,
 
 
     VerificacionIdentidadFormComponent,
     VerificacionIdentidadDetailComponent,
     AfiliacionDetailComponent,
- ],
+    DivisaComponent,
+    DivisaFormComponent,
+    DivisaDeleteComponent
+
+  ],
 
   imports: [
     CommonModule, SharedModule,
@@ -85,7 +77,7 @@ import { AfiliacionDetailComponent } from './razon-social/razon-social-form/afil
     MatFormFieldModule, MatInputModule, MatSnackBarModule, MatButtonModule, MatIconModule, MatRadioModule,
     MatSelectModule, MatCheckboxModule, MatCardModule, MatDatepickerModule, MatDialogModule, MatSortModule,
     MatToolbarModule, MaterialFileInputModule, MatMenuModule, MatTooltipModule, OwlDateTimeModule, MatSlideToggleModule,
-    CatalogosRoutingModule,
+    CatalogosRoutingModule, NgApexchartsModule, ChartsModule,
   ]
 })
 export class CatalogosModule { }

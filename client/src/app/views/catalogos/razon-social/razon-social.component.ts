@@ -91,7 +91,7 @@ export class RazonSocialComponent implements OnInit {
 
   }
   index() {
-    this.getRowsSub = this.advanceTableService.index<verificacion>('InformacionPerfil', {}, 'verificar').subscribe(data => {
+    this.getRowsSub = this.advanceTableService.index<verificacion>('Cliente', {}, 'verificar').subscribe(data => {
       this.rows = data;
     });
   }
@@ -105,34 +105,70 @@ export class RazonSocialComponent implements OnInit {
     });
   }
 
+  // simulador(informacionPerfilValidator: boolean) {
+  //     let data: any;
+  //     this.advanceTableService.create<Cliente>("Cliente").subscribe(result => {
+  //       data = result;
+  //       const dialogRef = this.dialog.open(RazonSocialFormComponent, {
+  //
+  //         data: { title: this._datos._title, disableClose: true, data: data, action: 'Agregar' }
+  //       });
+  //       dialogRef.afterClosed().subscribe((result) => {
+  //         if (!result) {
+  //           return
+  //         }
+  //
+  //         this.advanceTableService.save<string>("Cliente",result).subscribe(data => {
+  //           this.showNotification( 'snackbar-success', this._datos._title + 'Agregada!!', 'bottom', 'center' );
+  //         }, error => {
+  //           if (error._embedded !== undefined) {
+  //             this.showNotification( 'snackbar-danger', '¡¡Error al guardar!!', 'bottom', 'center' );
+  //             Object.entries(error._embedded.errors).forEach(([key, value]) => { });
+  //           }
+  //         })
+  //       });
+  //     });
+  //   }
+
+
   simulador(informacionPerfilValidator: boolean) {
+    const _dominio = 'Cliente'
+    if (informacionPerfilValidator) {
       let data: any;
-      this.advanceTableService.initService('Cliente')
-      this.advanceTableService.create<Cliente>().subscribe(result => {
+      this.advanceTableService.create<Cliente>(_dominio).subscribe(result => {
         data = result;
         const dialogRef = this.dialog.open(RazonSocialFormComponent, {
-
-          data: { title: this._datos._title, disableClose: true, data: data, action: 'Agregar' }
+          width: '80%', height: '95%',
+          data: {title: this._datos._title, disableClose: true, data: data, action: 'Agregar'}
         });
         dialogRef.afterClosed().subscribe((result) => {
           if (!result) {
             return
           }
 
-          this.advanceTableService.save<string>(result).subscribe(data => {
-            this.showNotification( 'snackbar-success', this._datos._title + 'Agregada!!', 'bottom', 'center' );
-          }, error => {
-            if (error._embedded !== undefined) {
-              this.showNotification( 'snackbar-danger', '¡¡Error al guardar!!', 'bottom', 'center' );
-              Object.entries(error._embedded.errors).forEach(([key, value]) => { });
-            }
-          })
-        });
+          this.advanceTableService.save<string>(_dominio, result).subscribe(() => {
+              this.ds.snack('success', '¡Afiliado creado satisfactoriamente!');
+              this.index();
+            }, () =>
+              this.ds.snack('danger', '¡Error al guardar!')
+          )
+        })
       });
+    } else {
+      let datos: Cliente;
+      this.advanceTableService.index<Cliente>(_dominio).subscribe(r => {
+        datos = r[0]
+        const dialogRef = this.dialog.open(AfiliacionDetailComponent, {
+          data: {title: 'Afiliación', datos: datos},
+          width: '60%'
+        });
+        dialogRef.afterClosed().subscribe((result) => {
+          if (result) {
+          }
+        });
+      })
     }
-
-
-
+  }
 
   addVerificacionIdentidad(verificacionIdentidadValidator: boolean) {
     const _dominio = 'VerificacionIdentidad'
@@ -187,8 +223,8 @@ export class RazonSocialComponent implements OnInit {
 
   Prestamo(b: boolean) {
     let data: any;
-    this.advanceTableService.initService('SolicitudPrestamo')
-    this.advanceTableService.create<SolicitudPrestamo>().subscribe(result => {
+
+    this.advanceTableService.create<SolicitudPrestamo>("SolicitudPrestamo").subscribe(result => {
       data = result;
       const dialogRef = this.dialog.open(SolicitudPrestamoComponent, {
 
@@ -199,7 +235,7 @@ export class RazonSocialComponent implements OnInit {
           return
         }
 
-        this.advanceTableService.save<string>(result).subscribe(data => {
+        this.advanceTableService.save<string>("SolicitudPrestamo",result).subscribe(data => {
           this.showNotification( 'snackbar-success',  'Agregada!!', 'bottom', 'center' );
         }, error => {
           if (error._embedded !== undefined) {
@@ -213,8 +249,8 @@ export class RazonSocialComponent implements OnInit {
 
   Prestar(b: boolean) {
     let data: any;
-    this.advanceTableService.initService('PrestarEfectivo')
-    this.advanceTableService.create<PrestarEfectivo>().subscribe(result => {
+
+    this.advanceTableService.create<PrestarEfectivo>("PrestarEfectivo").subscribe(result => {
       data = result;
       const dialogRef = this.dialog.open(PrestarEfectivoComponent, {
 
@@ -225,7 +261,7 @@ export class RazonSocialComponent implements OnInit {
           return
         }
 
-        this.advanceTableService.save<string>(result).subscribe(data => {
+        this.advanceTableService.save<string>("PrestarEfectivo",result).subscribe(data => {
           this.showNotification( 'snackbar-success',  'Agregada!!', 'bottom', 'center' );
         }, error => {
           if (error._embedded !== undefined) {

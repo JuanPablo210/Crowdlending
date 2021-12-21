@@ -1,37 +1,39 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
-import {DataSource, SelectionModel} from '@angular/cdk/collections';
-import {Menu} from '../../../core/models/data.interface';
-import {BehaviorSubject, fromEvent, merge, Observable, Subscription} from 'rxjs';
-import {AdvanceRestService} from '../../../core/service/advance-rest.service';
-import {HttpClient} from '@angular/common/http';
-import {GlobalService} from '../../../core/service/global.service';
-import {MatDialog} from '@angular/material/dialog';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {FormBuilder} from '@angular/forms';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatMenuTrigger} from '@angular/material/menu';
+import {DataSource, SelectionModel} from "@angular/cdk/collections";
+import {Divisa} from "../../../shared/interfaces/Invested.interface";
+import {BehaviorSubject, fromEvent, merge, Observable, Subscription} from "rxjs";
 
-import {map} from 'rxjs/operators';
-import {MenuFormComponent} from "./menu-form/menu-form.component";
-import {MenuDeleteComponent} from "./menu-delete/menu-delete.component";
+import {HttpClient} from "@angular/common/http";
+
+import {MatDialog} from "@angular/material/dialog";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {FormBuilder} from "@angular/forms";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatSort} from "@angular/material/sort";
+import {MatMenuTrigger} from "@angular/material/menu";
+import {map} from "rxjs/operators";
+import {DivisaFormComponent} from "./divisa-form/divisa-form.component";
+import {DivisaDeleteComponent} from "./divisa-delete/divisa-delete.component";
+import {AdvanceRestService} from "../../../core/service/advance-rest.service";
+import {GlobalService} from "../../../core/service/global.service";
 
 @Component({
-  selector: 'app-menu',
-  templateUrl: './menu.component.html',
-  styleUrls: ['./menu.component.sass']
+  selector: 'app-divisa',
+  templateUrl: './divisa.component.html',
+  styleUrls: ['./divisa.component.sass']
 })
-export class MenuComponent implements OnInit {
-  public _datos = { _title: 'Menu', _modulo: 'Catalogos', _icono: 'fas fa-folder-open', _dominio: 'Menu', _componente: 'Menu'};
+export class DivisaComponent implements OnInit {
+  public _datos = { _title: 'Divisa', _modulo: 'Catalogos', _icono: 'fas fa-folder-open', _dominio: 'Divisa', _componente: 'Divisa'}
+  modulo = 'Catálogos'
   displayedColumns = [ 'select',
-    'id',
-    'icono',
-    'nombre',
-    'etiqueta',
-    'habilitado',
+    'clave',
+//    'iconta',
+    'descripcion',
+//    'frecuencia',
+//    'escenario',
     'actions' ];
-  selection = new SelectionModel<Menu>(true, []);
-  advanceTable: Menu | null;
+  selection = new SelectionModel<Divisa>(true, []);
+  advanceTable: Divisa | null;
 
   id: number;
   public getRowsSub: Subscription;
@@ -51,22 +53,23 @@ export class MenuComponent implements OnInit {
   contextMenuPosition = { x: '0px', y: '0px' };
 
   ngOnInit() {
-
     this.loadData();
   }
 
   refresh() { this.loadData(); }
 
   addNew() {
-      const dialogRef = this.dialog.open(MenuFormComponent, {
-        data: { title: this._datos._title, disableClose: true, data: [], action: 'Agregar' }
+    let data: any;
+    this.advanceTableService.create<Divisa>(this._datos._dominio).subscribe(result => {
+      data = result;
+      console.log(this.advanceTable)
+      const dialogRef = this.dialog.open(DivisaFormComponent, {
+        data: { title: this._datos._title, disableClose: true, data: data, action: 'Agregar' }
       });
-      // tslint:disable-next-line:no-shadowed-variable
       dialogRef.afterClosed().subscribe((result) => {
-        if (!result) { return; }
+        if (!result) { return }
 
-        // tslint:disable-next-line:no-shadowed-variable
-        this.advanceTableService.save<string>(this._datos._dominio,result).subscribe(data => {
+        this.advanceTableService.save<string>(this._datos._dominio, result).subscribe(data => {
           this.showNotification( 'snackbar-success', this._datos._title + 'Agregada!!', 'bottom', 'center' );
           this.refresh();
         }, error => {
@@ -74,33 +77,32 @@ export class MenuComponent implements OnInit {
             this.showNotification( 'snackbar-danger', '¡¡Error al guardar!!', 'bottom', 'center' );
             Object.entries(error._embedded.errors).forEach(([key, value]) => { });
           }
-        });
+        })
         this.refreshTable();
       });
+    });
   }
 
   editCall(row) {
     this.id = row.id;
     let data: any;
-    this.advanceTableService.edit<Menu>(this._datos._dominio,this.id).subscribe(result => {
+    this.advanceTableService.edit<Divisa>(this._datos._dominio, this.id).subscribe(result => {
       data = result;
-      console.log(this.advanceTable);
-      const dialogRef = this.dialog.open(MenuFormComponent, {
-        data: { title: row.descripcion , disableClose: true, data: data, action: 'Editar' }
+      console.log(this.advanceTable)
+      const dialogRef = this.dialog.open(DivisaFormComponent, {
+        data: { title: row.descripcionCorta , disableClose: true, data: data, action: 'Editar' }
       });
-      // tslint:disable-next-line:no-shadowed-variable
       dialogRef.afterClosed().subscribe((result) => {
-        if (!result) { return; }
-        this.advanceTableService.update<string>(this._datos._dominio,this.id, result)
-          // tslint:disable-next-line:no-shadowed-variable
+        if (!result) { return }
+        this.advanceTableService.update<string>(this._datos._dominio, this.id, result)
           .subscribe(data => {
-            this.showNotification( 'snackbar-success', '¡¡ ' + this._datos._title + ' Editada!!', 'bottom', 'center' );
+            this.showNotification( 'snackbar-success','¡¡ ' + this._datos._title + ' Editada!!', 'bottom', 'center' );
             this.refresh();
           }, error => {
             if (error._embedded !== undefined) {
               this.showNotification( 'snackbar-danger', 'Error al guardar', 'bottom', 'center' );
               Object.entries(error._embedded.errors).forEach(([key, value]) => {});
-            }});
+            }})
         this.refreshTable();
       });
     });
@@ -108,11 +110,11 @@ export class MenuComponent implements OnInit {
 
   deleteItem(row) {
     this.id = row.id;
-    const dialogRef = this.dialog.open(MenuDeleteComponent, { data: row });
+    const dialogRef = this.dialog.open(DivisaDeleteComponent, { data: row });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.advanceTableService.delete<string>(this._datos._dominio,row.id)
-            .subscribe(data => {
+        this.advanceTableService.delete<string>(this._datos._dominio, row.id)
+          .subscribe(data => {
             this.showNotification( 'snackbar-danger', '¡¡ ' + this._datos._title + ' Eliminada!!', 'bottom', 'center' );
             this.refresh();
           }, error => {
@@ -123,7 +125,7 @@ export class MenuComponent implements OnInit {
     });
   }
 
-  private refreshTable() { this.paginator._changePageSize(this.paginator.pageSize); }
+  private refreshTable() { this.paginator._changePageSize(this.paginator.pageSize) }
 
   isAllSelected() {
     const numSelected = this.selection.selected.length;
@@ -131,14 +133,13 @@ export class MenuComponent implements OnInit {
     return numSelected === numRows;
   }
 
-  masterToggle() { this.isAllSelected() ? this.selection.clear() : this.dataSource.renderedData.forEach((row) =>
-    this.selection.select(row)); }
+  masterToggle() { this.isAllSelected() ? this.selection.clear() : this.dataSource.renderedData.forEach((row) => this.selection.select(row))}
 
   removeSelectedRows() {
     const totalSelect = this.selection.selected.length;
     this.selection.selected.forEach((item) => {
-      this.advanceTableService.delete<string>(this._datos._dominio,item.id).subscribe();
-      this.selection = new SelectionModel<Menu>(true, []);
+      this.advanceTableService.delete<string>(this._datos._dominio, item.id).subscribe()
+      this.selection = new SelectionModel<Divisa>(true, []);
     });
     this.loadData();
     this.showNotification( 'snackbar-danger', totalSelect + '¡¡Registros Eliminados!!', 'bottom', 'center'  );
@@ -154,11 +155,10 @@ export class MenuComponent implements OnInit {
   }
 
   showNotification(colorName, text, placementFrom, placementAlign) {
-    this.snackBar.open(text, '', { duration: 2000, verticalPosition: placementFrom,
-      horizontalPosition: placementAlign, panelClass: colorName });
+    this.snackBar.open(text, '', { duration: 2000, verticalPosition: placementFrom, horizontalPosition: placementAlign, panelClass: colorName });
   }
 
-  onContextMenu(event: MouseEvent, item: Menu) {
+  onContextMenu(event: MouseEvent, item: Divisa) {
     event.preventDefault();
     this.contextMenuPosition.x = event.clientX + 'px';
     this.contextMenuPosition.y = event.clientY + 'px';
@@ -167,29 +167,24 @@ export class MenuComponent implements OnInit {
     this.contextMenu.openMenu();
   }
 }
-export class DivisaDataSource extends DataSource<Menu> {
+export class DivisaDataSource extends DataSource<Divisa> {
   _filterChange = new BehaviorSubject('');
   get filter(): string { return this._filterChange.value; }
   set filter(filter: string) { this._filterChange.next(filter); }
-  filteredData: Menu[] = [];
-  renderedData: Menu[] = [];
+  filteredData: Divisa[] = [];
+  renderedData: Divisa[] = [];
 
   constructor(public _dataSource: AdvanceRestService, public _paginator: MatPaginator, public _sort: MatSort, private _dominio: string ) {
     super();
     this._filterChange.subscribe(() => (this._paginator.pageIndex = 0));
   }
 
-  connect(): Observable<Menu[]> {
+  connect(): Observable<Divisa[]> {
     const displayDataChanges = [ this._dataSource.dataChange, this._sort.sortChange, this._filterChange, this._paginator.page ];
-    this._dataSource.getAdvancedTable<any>(this._dominio, {'max': 100});
+    this._dataSource.getAdvancedTable<any>(this._dominio,{'max': 100});
     return merge(...displayDataChanges).pipe( map(() => {
-        this.filteredData = this._dataSource.data.slice().filter((advanceTable: Menu) => {
-          const searchStr = (
-            advanceTable.icono +
-          advanceTable.nombre +
-          advanceTable.etiqueta +
-          advanceTable.habilitado
-          ).toLowerCase();
+        this.filteredData = this._dataSource.data.slice().filter((advanceTable: Divisa) => {
+          const searchStr = ( advanceTable.id + advanceTable.clave + advanceTable.iconta + advanceTable.descripcion + advanceTable.frecuencia + advanceTable.escenario ).toLowerCase();
           return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
         });
         const sortedData = this.sortData(this.filteredData.slice());
@@ -202,7 +197,7 @@ export class DivisaDataSource extends DataSource<Menu> {
 
   disconnect() {}
 
-  sortData(data: Menu[]): Menu[] {
+  sortData(data: Divisa[]): Divisa[] {
     if (!this._sort.active || this._sort.direction === '') { return data; }
     return data.sort((a, b) => {
       let propertyA: number | string = '';
@@ -211,14 +206,20 @@ export class DivisaDataSource extends DataSource<Menu> {
         case 'id':
           [propertyA, propertyB] = [a.id, b.id];
           break;
-        case 'icono':
-          [propertyA, propertyB] = [a.icono, b.icono];
+        case 'clave':
+          [propertyA, propertyB] = [a.clave, b.clave];
           break;
-        case 'nombre':
-          [propertyA, propertyB] = [a.nombre, b.nombre];
+        case 'iconta':
+          [propertyA, propertyB] = [a.iconta, b.iconta];
           break;
-        case 'etiqueta':
-          [propertyA, propertyB] = [a.etiqueta, b.etiqueta];
+        case 'descripcion':
+          [propertyA, propertyB] = [a.descripcion, b.descripcion];
+          break;
+        case 'frecuencia':
+          [propertyA, propertyB] = [a.frecuencia, b.frecuencia];
+          break;
+        case 'escenario':
+          [propertyA, propertyB] = [a.escenario, b.escenario];
           break;
       }
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;
@@ -229,4 +230,3 @@ export class DivisaDataSource extends DataSource<Menu> {
     });
   }
 }
-

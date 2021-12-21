@@ -26,7 +26,7 @@ export class UsuarioComponent implements OnInit {
 
   ngOnInit() {
     this.activeView = this.router.snapshot.params['view'];
-    this.advanceTableService.initService(this._datos._dominio);
+
     this.index();
   }
   index() {
@@ -36,7 +36,7 @@ export class UsuarioComponent implements OnInit {
 
   addNew() {
     let data: any;
-    this.advanceTableService.create<_usuario>().subscribe(result => {
+    this.advanceTableService.create<_usuario>(this._datos._dominio).subscribe(result => {
       data = result;
       const dialogRef = this.dialog.open(UsuarioFormComponent, {
         data: { title: this._datos._title, disableClose: true, data: data, action: 'Agregar' }
@@ -44,7 +44,7 @@ export class UsuarioComponent implements OnInit {
       dialogRef.afterClosed().subscribe((result) => {
         if (!result) { return; }
 
-        this.advanceTableService.save<string>(result).subscribe(data => {
+        this.advanceTableService.save<string>(this._datos._dominio,result).subscribe(data => {
           this.showNotification( 'snackbar-success', this._datos._title + 'Agregada!!', 'bottom', 'center' );
         }, error => {
           if (error._embedded !== undefined) {
@@ -61,7 +61,7 @@ export class UsuarioComponent implements OnInit {
   editCall(row) {
     this.id = row.id;
     let data: any;
-    this.advanceTableService.edit<_usuario>(this.id).subscribe(result => {
+    this.advanceTableService.edit<_usuario>(this._datos._dominio,this.id).subscribe(result => {
       data = result;
       const nombre = row.nombre + ' ' + row.apellidoPaterno + ' ' + row.apellidoMaterno;
       const dialogRef = this.dialog.open(UsuarioFormComponent, {
@@ -69,7 +69,7 @@ export class UsuarioComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe((result) => {
         if (!result) { return; }
-        this.advanceTableService.update<string>(this.id, result)
+        this.advanceTableService.update<string>(this._datos._dominio,this.id, result)
           .subscribe(data => {
             this.showNotification( 'snackbar-success', '¡¡ ' + this._datos._title + ' Editada!!', 'bottom', 'center' );
           }, error => {
@@ -87,7 +87,7 @@ export class UsuarioComponent implements OnInit {
     const dialogRef = this.dialog.open(UsuarioDeleteComponent, { data: row });
     dialogRef.afterClosed().subscribe((result) => {
       if (result) {
-        this.advanceTableService.delete<string>(row.id)
+        this.advanceTableService.delete<string>(this._datos._dominio,row.id)
             .subscribe(data => {
             this.showNotification( 'snackbar-danger', '¡¡ ' + this._datos._title + ' Eliminada!!', 'bottom', 'center' );
             this.index();

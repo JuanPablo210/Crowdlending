@@ -9,7 +9,7 @@ import {
   HostListener,
   OnDestroy
 } from '@angular/core';
-import { ROUTES } from './sidebar-items';
+import {CAPTURADATOS, PRESTAREFECTIVO, ROUTES} from './sidebar-items';
 import {AuthGuard} from "../../core/guard/auth.guard";
 import {GlobalService} from "../../core/service/global.service";
 
@@ -21,8 +21,9 @@ import {GlobalService} from "../../core/service/global.service";
 export class SidebarComponent implements OnInit, OnDestroy {
   user: string;
   avatar: string;
-  puesto: string;
+  role: string;
   public sidebarItems: any[];
+  showMenu = 'dashboard';
   level1Menu = '';
   level2Menu = '';
   level3Menu = '';
@@ -90,16 +91,31 @@ export class SidebarComponent implements OnInit, OnDestroy {
       this.level3Menu = element;
     }
   }
+  // ngOnInit() {
+  //   if (this.auth.checkUserLogin()) {
+  //     this.sidebarItems = ROUTES.filter((sidebarItem) => sidebarItem);
+  //   }
+  //
+  //   this.initLeftSidebar();
+  //   this.bodyTag = this.document.body;
+  //   this.user = this.globalService.getName();
+  //   this.avatar = this.globalService.getAvatar();
+  //   this.puesto = this.globalService.getPuesto();
+  // }Administrador de Sistemas
   ngOnInit() {
-    if (this.auth.checkUserLogin()) {
+    this.role = this.globalService.getRole();
+    if (this.role == 'admin') {
       this.sidebarItems = ROUTES.filter((sidebarItem) => sidebarItem);
+    } else if(this.role == 'Afiliado'){
+      this.sidebarItems =  CAPTURADATOS.filter((sidebarItem) => sidebarItem);
+    } else if (this.role == 'Mesa de Control'){
+      this.sidebarItems = PRESTAREFECTIVO.filter((sidebarItem) => sidebarItem);
     }
-
+    // this.sidebarItems = this.globalService.getMenu();
     this.initLeftSidebar();
     this.bodyTag = this.document.body;
     this.user = this.globalService.getName();
     this.avatar = this.globalService.getAvatar();
-    this.puesto = this.globalService.getPuesto();
   }
   ngOnDestroy() {
     this.routerObj.unsubscribe();

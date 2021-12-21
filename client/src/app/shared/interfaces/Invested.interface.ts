@@ -124,6 +124,15 @@ export interface PrestarEfectivo{
   detalleprestar: string;
 }
 
+export interface Calendar_{
+  id: number;
+  titulo: string;
+  categoria: string;
+  fechaInicio: Date;
+  fechaFin: Date;
+  detalle: string;
+
+}
 
 export interface SolicitudPrestamo{
   id: number;

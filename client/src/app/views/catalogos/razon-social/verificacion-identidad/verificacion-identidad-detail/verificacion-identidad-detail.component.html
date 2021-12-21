@@ -1,0 +1,193 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <div class="modal-about">
+          <div class="font-weight-bold p-t-5 p-l-10 font-17">
+            Verificación de Identidad
+          </div>
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content class="body">
+    <mat-horizontal-stepper [linear]="isLinear" #stepper ngClass="{{ 'last-edited-step-' + stepper.selectedIndex }}"
+                            labelPosition="bottom">
+      <mat-step [stepControl]="domicilioForm">
+        <form class="register-form m-4" [formGroup]="domicilioForm">
+          <ng-template style="pointer-events: none !important;" matStepLabel>Comprobante de domicilio</ng-template>
+          <mat-card>
+            <div class="row">
+              <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 mb-2"><p>Nombre del archivo:
+                <b>{{domicilioImg.nombre}}</b></p></div>
+              <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2"><p>Fecha de subida:
+                <b>{{domicilioImg.fechaAlta | date: 'dd-MM-yyyy'}}</b></p></div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2" align="center">
+                <mat-label *ngIf="domicilioImg.contentType == 'application/pdf'">Vista previa no disponible</mat-label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2" align="center"><img
+                *ngIf="domicilioImg.contentType != 'application/pdf'"
+                [src]="'data:'+ domicilioImg.contentType +';base64,' + domicilioImg.imagen"></div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2" align="center">
+                <button mat-raised-button color="primary" (click)="descargar(domicilioImg)">Descargar
+                  <mat-icon>download</mat-icon>
+                </button>
+              </div>
+            </div>
+          </mat-card>
+          <mat-dialog-actions align="center">
+            <button mat-button matStepperNext class="btn-primary">Continuar</button>
+          </mat-dialog-actions>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="identificacionForm">
+        <form [formGroup]="identificacionForm">
+          <ng-template matStepLabel>Identificación</ng-template>
+          <mat-card>
+            <div class="row">
+              <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 mb-2"><p>Nombre del archivo:
+                <b>{{identificacionImg.nombre}}</b></p></div>
+              <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2"><p>Fecha de subida:
+                <b>{{identificacionImg.fechaAlta | date: 'dd-MM-yyyy'}}</b></p></div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2" align="center">
+                <mat-label *ngIf="identificacionImg.contentType == 'application/pdf'">Vista previa no disponible
+                </mat-label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2" align="center"><img
+                *ngIf="identificacionImg.contentType != 'application/pdf'"
+                [src]="'data:'+ identificacionImg.contentType +';base64,' + identificacionImg.imagen"></div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2" align="center">
+                <button mat-raised-button color="primary" (click)="descargar(identificacionImg)">Descargar
+                  <mat-icon>download</mat-icon>
+                </button>
+              </div>
+            </div>
+          </mat-card>
+          <mat-dialog-actions align="center">
+            <button mat-button matStepperNext class="btn-primary">Continuar</button>
+          </mat-dialog-actions>
+        </form>
+      </mat-step>
+
+
+      <mat-step [stepControl]="bancarioForm">
+        <form [formGroup]="bancarioForm">
+          <ng-template matStepLabel>Comprobante bancario</ng-template>
+          <mat-card>
+            <div class="row">
+              <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 mb-2"><p>Nombre del archivo:
+                <b>{{bancarioImg.nombre}}</b></p></div>
+              <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2"><p>Fecha de subida:
+                <b>{{bancarioImg.fechaAlta | date: 'dd-MM-yyyy'}}</b></p></div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2" align="center">
+                <mat-label *ngIf="bancarioImg.contentType == 'application/pdf'">Vista previa no disponible</mat-label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2" align="center"><img
+                *ngIf="bancarioImg.contentType != 'application/pdf'"
+                [src]="'data:'+ bancarioImg.contentType +';base64,' + bancarioImg.imagen"></div>
+            </div>
+
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2" align="center">
+                <button mat-raised-button color="primary" (click)="descargar(bancarioImg)">Descargar
+                  <mat-icon>download</mat-icon>
+                </button>
+              </div>
+            </div>
+          </mat-card>
+          <mat-dialog-actions align="center">
+            <button mat-button matStepperNext class="btn-primary">Continuar</button>
+          </mat-dialog-actions>
+        </form>
+      </mat-step>
+
+
+      <mat-step [stepControl]="fiscalForm">
+        <form [formGroup]="fiscalForm">
+          <ng-template matStepLabel>Comprobante fiscal</ng-template>
+          <mat-card>
+            <div class="row">
+              <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 mb-2"><p>Nombre del archivo: <b>{{fiscalImg.nombre}}</b>
+              </p></div>
+              <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2"><p>Fecha de subida:
+                <b>{{fiscalImg.fechaAlta | date: 'dd-MM-yyyy'}}</b></p></div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2" align="center">
+                <mat-label *ngIf="fiscalImg.contentType == 'application/pdf'">Vista previa no disponible</mat-label>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2" align="center"><img
+                *ngIf="fiscalImg.contentType != 'application/pdf'"
+                [src]="'data:'+ fiscalImg.contentType +';base64,' + fiscalImg.imagen"></div>
+            </div>
+            <div class="row">
+              <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2" align="center">
+                <button mat-raised-button color="primary" (click)="descargar(fiscalImg)">Descargar
+                  <mat-icon>download</mat-icon>
+                </button>
+              </div>
+            </div>
+          </mat-card>
+          <mat-dialog-actions align="center">
+            <button mat-button matStepperNext class="btn-primary">Continuar</button>
+          </mat-dialog-actions>
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="fotografiaForm">
+        <ng-template matStepLabel>Fotografía</ng-template>
+        <mat-card>
+          <div class="row">
+            <div class="col-xl-8 col-lg-8 col-md-12 col-sm-12 mb-2"><p>Nombre del archivo:
+              <b>{{fotografiaImg.nombre}}</b></p></div>
+            <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2"><p>Fecha de subida:
+              <b>{{fotografiaImg.fechaAlta | date: 'dd-MM-yyyy'}}</b></p></div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2" align="center">
+              <mat-label *ngIf="fotografiaImg.contentType == 'application/pdf'">Vista previa no disponible</mat-label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2" align="center"><img
+              *ngIf="fotografiaImg.contentType != 'application/pdf'"
+              [src]="'data:'+ fotografiaImg.contentType +';base64,' + fotografiaImg.imagen"></div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2" align="center">
+              <button mat-raised-button color="primary" (click)="descargar(fotografiaImg)">Descargar
+                <mat-icon>download</mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-card>
+        <mat-dialog-actions align="center">
+          <button mat-button mat-dialog-close class="btn-primary">Aceptar</button>
+        </mat-dialog-actions>
+      </mat-step>
+
+    </mat-horizontal-stepper>
+  </div>
+</div>

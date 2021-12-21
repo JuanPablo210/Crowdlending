@@ -1,0 +1,239 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <div class="modal-about">
+          <div class="font-weight-bold p-t-5 p-l-10 font-17">
+            Carga de documentos
+          </div>
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content class="body">
+    <mat-horizontal-stepper [linear]="isLinear" #stepper ngClass="{{ 'last-edited-step-' + stepper.selectedIndex }}"
+                            labelPosition="bottom">
+      <mat-step [stepControl]="domicilioForm">
+        <form class="register-form m-4" [formGroup]="domicilioForm" (ngSubmit)="submit">
+          <ng-template style="pointer-events: none !important;" matStepLabel>Comprobante de domicilio</ng-template>
+
+          <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Tipo de comprobante</mat-label>
+                <mat-select formControlName="tipoComprobante">
+                  <mat-option matTooltip="No mayor a 3 meses" value="Recibo de luz">Recibo de luz</mat-option>
+                  <mat-option matTooltip="No mayor a 3 meses" value="Recibo de agua">Recibo de agua</mat-option>
+                  <mat-option matTooltip="No mayor a 3 meses" value="Recibo de telefono">Recibo de teléfono</mat-option>
+                  <mat-option value="Predial">Predial</mat-option>
+
+                </mat-select>
+                <mat-error *ngIf="domicilioForm.get('tipoComprobante').hasError('required')">
+                  El campo Tipo de comprobante es requerido
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <div class="row">
+                <mat-label>Comprobante de domicilio</mat-label>
+              </div>
+              <input type="file" accept="application/pdf, image/*" (change)="onFileChange1($event)"/>
+
+            </div>
+          </div>
+          <br>
+
+
+          <div class="row">
+            <div class="p-10">
+              <button mat-raised-button matStepperNext class="btn-primary" [disabled]="domicilioForm.invalid">
+                Siguiente
+              </button>
+            </div>
+            <div class="p-10">
+              <button mat-raised-button (click)="dialogRef.close()" class="btn-danger">Cancelar</button>
+            </div>
+          </div>
+
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="identificacionForm">
+        <form [formGroup]="identificacionForm">
+          <ng-template matStepLabel>Identificación</ng-template>
+
+
+          <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Tipo de identificación</mat-label>
+                <mat-select formControlName="tipoIdentificacion">
+                  <mat-option value="INE">INE</mat-option>
+                  <mat-option value="Pasaporte">Pasaporte</mat-option>
+                  <mat-option value="Cedula Profesional">Cédula Profesional</mat-option>
+                </mat-select>
+                <mat-error *ngIf="identificacionForm.get('tipoIdentificacion').hasError('required')">
+                  El campo Tipo de identificación es requerido
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <div class="row">
+                <mat-label>Identificación</mat-label>
+              </div>
+              <input type="file" accept="application/pdf, image/*" (change)="onFileChange2($event)"/>
+
+            </div>
+          </div>
+          <br>
+
+          <div class="row">
+            <div class="p-10">
+              <button mat-raised-button matStepperNext class="btn-primary" [disabled]="identificacionForm.invalid">
+                Siguiente
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </mat-step>
+
+
+      <mat-step [stepControl]="bancarioForm">
+        <form [formGroup]="bancarioForm">
+          <ng-template matStepLabel>Comprobante bancario</ng-template>
+
+
+          <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Comprobante bancario</mat-label>
+                <mat-select formControlName="tipoInfoBancaria">
+                  <mat-option matTooltip="Solo la carátula" value="Estado de cuenta">Estado de cuenta</mat-option>
+                </mat-select>
+                <mat-error *ngIf="bancarioForm.get('tipoInfoBancaria').hasError('required')">
+                  El campo Comprobante bancario es requerido
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <div class="row">
+                <mat-label>Comprobante bancario</mat-label>
+              </div>
+              <input type="file" accept="application/pdf, image/*" (change)="onFileChange3($event)"/>
+            </div>
+          </div>
+          <br>
+
+          <div class="row">
+            <div class="p-10">
+              <button mat-raised-button matStepperNext class="btn-primary" [disabled]="bancarioForm.invalid">
+                Siguiente
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </mat-step>
+
+
+      <mat-step [stepControl]="fiscalForm">
+        <form [formGroup]="fiscalForm">
+          <ng-template matStepLabel>Comprobante fiscal</ng-template>
+
+
+          <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Tipo de comprobante fiscal</mat-label>
+                <mat-select formControlName="tipoInfoFiscal">
+                  <mat-option value="RFC">RFC</mat-option>
+                </mat-select>
+                <mat-error *ngIf="fiscalForm.get('tipoInfoFiscal').hasError('required')">
+                  El campo Tipo de comprobante fiscal es requerido
+                </mat-error>
+              </mat-form-field>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+              <div class="row">
+                <mat-label>Comprobante fiscal</mat-label>
+              </div>
+              <input type="file" accept="application/pdf, image/*" (change)="onFileChange5($event)"/>
+            </div>
+          </div>
+          <br>
+
+          <div class="row">
+            <div class="p-10">
+              <button mat-raised-button matStepperNext class="btn-primary" [disabled]="fiscalForm.invalid">
+                Siguiente
+              </button>
+            </div>
+          </div>
+
+        </form>
+      </mat-step>
+
+      <mat-step [stepControl]="fotografiaForm">
+        <!--        <form [formGroup]="formulariofoto">-->
+        <ng-template matStepLabel>Fotografía</ng-template>
+
+        <div style="text-align:center">
+          <h1>
+            Verificación de identidad
+          </h1>
+
+          <div>
+            <webcam [height]="500" [width]="500" [trigger]="triggerObservable" (imageCapture)="handleImage($event)"
+                    *ngIf="showWebcam"
+                    [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable"
+                    [videoOptions]="videoOptions"
+                    [imageQuality]="1"
+                    mirrorImage="never"
+                    (cameraSwitched)="cameraWasSwitched($event)"
+                    (initError)="handleInitError($event)"
+            ></webcam>
+            <br/>
+            <button mat-raised-button class="btn-primary" class="actionBtn" (click)="triggerSnapshot();">Tomar
+              fotografía
+            </button>
+          </div>
+        </div>
+
+        <div class="snapshot" *ngIf="webcamImage" align="center">
+          <h2>Captura tomada</h2>
+          <img [src]="webcamImage.imageAsDataUrl" alt="FOTO"/>
+        </div>
+
+        <h4 *ngIf="errors.length > 0">El apartado de Fotografiá no esta disponible en dispositivos MAC</h4>
+        <!--        <ul *ngFor="let error of errors">-->
+        <!--          <li>{{error | json}}</li>-->
+        <!--        </ul>-->
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+            <div class="example-button-row">
+              <button mat-raised-button class="btn-primary" [type]="submit" [disabled]="formulario.invalid"
+                      (click)="confirmAdd()">Cargar
+              </button>
+              <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">Cancelar</button>
+            </div>
+          </div>
+        </div>
+      </mat-step>
+
+    </mat-horizontal-stepper>
+  </div>
+</div>

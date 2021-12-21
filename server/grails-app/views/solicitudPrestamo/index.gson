@@ -1,0 +1,8 @@
+import mx.saccsa.Crowdlending.SolicitudPrestamo
+
+model {
+	Iterable<SolicitudPrestamo> solicitudPrestamoList
+}
+
+json tmpl.solicitudPrestamo(solicitudPrestamoList ?: [])
+

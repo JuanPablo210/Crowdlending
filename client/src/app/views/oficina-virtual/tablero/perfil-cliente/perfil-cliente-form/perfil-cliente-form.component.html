@@ -1,0 +1,109 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <div class="modal-about">
+          <div class="font-weight-bold p-t-5 p-l-10 font-17">
+            Perfil del cliente</div>
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="body">
+    <form [formGroup]="formularioPerfil">
+      <ng-template matStepLabel>Perfil del afiliado</ng-template>
+
+      <div class="row">
+        <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 mb-2 text-justify">
+          <mat-label>
+            ¿Declara usted que los recursos destinados para el pago de la aportación mensual acordada son y
+            serán de procedencia licita?
+          </mat-label>
+        </div>
+        <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+          {{yes}}
+          <mat-slide-toggle style="transform: rotate(180deg)" formControlName="legalidadRecursos"></mat-slide-toggle>
+          No
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 mb-2">
+          <mat-label>
+            ¿Es usted el propietario real de dichos recursos?
+          </mat-label>
+        </div>
+        <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+          {{yes}}
+          <mat-slide-toggle style="transform: rotate(180deg)" formControlName="propietarioRecursos"></mat-slide-toggle>
+          No
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2 text-justify"
+             *ngIf="formularioPerfil.get('propietarioRecursos').value==false">
+          <h6>En caso de que usted actúe a nombre de un tercero, por favor especifique el nombre del propietario real de
+            los recursos:</h6>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Propietario de los recursos</mat-label>
+            <input matInput formControlName="propietarioRecursosReal">
+            <mat-error *ngIf="formularioPerfil.get('propietarioRecursosReal').hasError('required')">
+              Propietario de los recursos es requerido
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 mb-2 text-justify">
+          <mat-label class="text-justify">
+            ¿Es usted una Persona Políticamente Expuesta o familiar (hijo, cónyuge, hermano,
+            padre/madre) de alguna?
+          </mat-label>
+        </div>
+        <div class="col-xl-2 col-lg-2 col-md-12 col-sm-12 mb-2">
+          {{yes}}
+          <mat-slide-toggle style="transform: rotate(180deg)" formControlName="puestoPolitico"></mat-slide-toggle>
+          No
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2 text-justify">
+          <h6><b>Persona Políticamente Expuesta:</b> Son individuos que cumplen o a quienes se les han confiado
+            funciones públicas prominentes (en el ámbito nacional o Internacional), por ejemplo: los Jefes de
+            Estado o de Gobierno y políticos de alto nivel.</h6>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2 text-justify"
+             *ngIf="formularioPerfil.get('puestoPolitico').value==true">
+          <h6>En caso de que sea usted familiar de una persona políticamente expuesta, por favor especifique el
+            nombre y puesto de su familiar:</h6>
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>Nombre de la persona políticamente expuesta</mat-label>
+            <input matInput formControlName="nombrePersonaPolitica">
+            <mat-error *ngIf="formularioPerfil.get('nombrePersonaPolitica').hasError('required')">
+              Propietario de los recursos es requerido
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="p-l-10">
+          <button mat-raised-button (click)="Guardar()" class="btn-primary" [disabled]="formularioPerfil.invalid">
+            Guardar
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+

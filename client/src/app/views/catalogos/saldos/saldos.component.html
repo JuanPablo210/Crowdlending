@@ -1,0 +1,172 @@
+<section class="content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+          <ul class="breadcrumb breadcrumb-style ">
+            <li class="breadcrumb-item">
+              <h4 class="page-title">{{_datos._componente}}</h4>
+            </li>
+            <li class="breadcrumb-item bcrumb-1">
+              <i class="{{_datos._icono}}"></i> {{_datos._modulo}}
+            </li>
+            <li class="breadcrumb-item bcrumb-0">{{_datos._componente}}
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <form class="register-form" [formGroup]="formulario" (ngSubmit)="submit">
+      <div class="card">
+        <div class="body">
+          <div class="row">
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-0">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Fecha Inicial</mat-label>
+                <input matInput [matDatepicker]="DatepickerInicial" name="fechaIni" formControlName="fechaIni">
+                <mat-datepicker-toggle matSuffix [for]="DatepickerInicial"></mat-datepicker-toggle>
+                <mat-datepicker #DatepickerInicial></mat-datepicker>
+                <!--mat-icon matSuffix>icon name</mat-icon-->
+                <mat-error *ngIf="formulario.get('fechaIni').hasError('required')">
+                  Fecha es requerida
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mb-0">
+              <mat-form-field class="example-full-width" appearance="outline">
+                <mat-label>Fecha Final</mat-label>
+                <input matInput [matDatepicker]="DatepickerFinal" name="fechaFin" formControlName="fechaFin">
+                <mat-datepicker-toggle matSuffix [for]="DatepickerFinal"></mat-datepicker-toggle>
+                <mat-datepicker #DatepickerFinal></mat-datepicker>
+                <!--mat-icon matSuffix>icon name</mat-icon-->
+                <mat-error *ngIf="formulario.get('fechaFin').hasError('required')">
+                  Fecha es requerida
+                </mat-error>
+              </mat-form-field>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mt-2">
+              <div class="example-button-row">
+                <button mat-mini-fab color="primary" [type]="submit" [disabled]="!formulario.valid"
+                        [mat-dialog-close]="1" (click)="loadData();cargarSaldo()">
+                  <mat-icon class="col-white" matTooltip="Consultar">search</mat-icon>
+                </button>
+              </div>
+            </div>
+            <div class="col-xl-3 col-lg-3 col-md-12 col-sm-12 mt-2" *ngIf="saldo!=null">
+              <div class="row">
+                <p><span class="font-weight-bold"> Saldo Inicial </span></p>
+              </div>
+              <div class="row">
+                <p><span class="font-weight-bold">{{saldo.saldo|currency: 'USD'}}</span></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <div class="card">
+          <div class="body">
+            <div class="responsive_table">
+              <div class="materialTableHeader">
+                <div class="row">
+
+                  <div class="col-8">
+                    <ul class="header-buttons-left ml-0">
+                      <li class="dropdown"><h2><strong>{{_datos._title}}</strong></h2></li>
+                      <li class="dropdown m-l-20">
+                        <label><i class="material-icons search-icon">search</i></label>
+                        <input placeholder="Buscar..." type="text" #filter class="browser-default search-field"
+                               aria-label="Search box">
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="col-4">
+                    <ul class="header-buttons">
+                      <li>
+                        <div class="icon-button-demo">
+                          <button mat-mini-fab color="primary" (click)="loadData();cargarSaldo()"
+                                  matTooltip="Actualizar datos">
+                            <mat-icon class="col-white">refresh</mat-icon>
+                          </button>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+
+                </div>
+              </div>
+
+              <mat-table #table [dataSource]="dataSource" matSort class="mat-cell">
+
+                <ng-container matColumnDef="folio">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Folio</mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    {{row.folio}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="fechaLiquidacion">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Fecha de Liquidación</mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    {{row.fechaLiquidacion}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="concepto">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Concepto</mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    {{row.concepto}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="masMenos">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>+-</mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    {{row.etiqueta}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="importe">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Importe</mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    {{row.importe | currency: 'USD'}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="saldoProyectado">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Saldo Proyectado</mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    {{row.saldoProyectado | currency: 'USD'}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="saldoEfectivo">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Saldo Efectivo</mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    {{row.saldoEfectivo | currency: 'USD'}}</mat-cell>
+                </ng-container>
+
+                <ng-container matColumnDef="estatus">
+                  <mat-header-cell *matHeaderCellDef mat-sort-header>Estatus</mat-header-cell>
+                  <mat-cell *matCellDef="let row">
+                    {{row.estatus}}</mat-cell>
+                </ng-container>
+
+                <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+                <mat-row *matRowDef="let row; columns: displayedColumns;"
+                         [style.cursor]="'pointer'" matRipple>
+                </mat-row>
+              </mat-table>
+
+              <div class="no-results" [style.display]="dataSource.renderedData.length == 0 ? '' : 'none'">No se
+                encontraron Resultados
+              </div>
+              <mat-paginator #paginator [length]="dataSource.filteredData.length" [pageIndex]="0" [pageSize]="10"
+                             [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

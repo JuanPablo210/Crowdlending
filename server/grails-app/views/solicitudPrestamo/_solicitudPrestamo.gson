@@ -1,0 +1,7 @@
+import mx.saccsa.Crowdlending.SolicitudPrestamo
+
+model {
+	SolicitudPrestamo solicitudPrestamo
+}
+
+json g.render(solicitudPrestamo, [resolveTemplate: false])

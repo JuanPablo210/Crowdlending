@@ -1,0 +1,53 @@
+<mat-toolbar class="navbar">
+  <div>
+    <img src="assets/images/invlg.png" alt="Crodwdlending" class="headLogo"/>
+  </div>
+
+</mat-toolbar>
+
+<div class="limiter">
+  <div class="container-login100">
+    <div class="wrap-login100">
+      <form class="login100-form validate-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <span class="login100-form-title pb-5"> Acceso a tu cuenta </span>
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Usuario</mat-label>
+              <input matInput formControlName="username" />
+              <mat-icon matSuffix>face</mat-icon>
+            </mat-form-field>
+          </div>
+        </div>
+          <div class="row">
+          <div class="col-xl-12col-lg-12 col-md-12 col-sm-12 mb-2">
+            <mat-form-field class="example-full-width" appearance="outline">
+              <mat-label>Contraseña</mat-label>
+              <input matInput [type]="hide ? 'password' : 'text'" formControlName="password">
+              <a class="show-pwd-icon" href="#" onClick="return false;" matSuffix (click)="hide = !hide"
+                [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </a>
+            </mat-form-field>
+          </div>
+        </div>
+        <div class="container-login100-form-btn">
+          <button mat-flat-button class="login100-form-btn" type="submit">
+            Ingresar
+          </button>
+        </div>
+
+        <div class="mt-5 text-center">
+          <p>¿Aún no tienes una cuenta? <a routerLink="/PreRegistro" class="font-weight-medium text-success">
+            Registrarme</a> </p>
+          <p><a routerLink="/Autenticacion/forgot-password" class="font-weight-medium text-success">
+            Olvide mi contraseña</a></p>
+        </div>
+
+        <div *ngIf="error" class="alert alert-danger mt-3 mb-0">{{error}}</div>
+      </form>
+      <div class="login100-more" style="background-image: url('assets/images/pages/bnBienvenido.png');">
+      </div>
+    </div>
+  </div>
+</div>

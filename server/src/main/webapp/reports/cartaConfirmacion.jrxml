@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version last-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="AmortizacionEmisoras" language="groovy" pageWidth="612" pageHeight="1017" whenNoDataType="AllSectionsNoDetail" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="6be87acf-9e38-40e1-a98a-78d7c5d49ec8">
+	<style name="background">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[new Boolean($P{styleName} == "viaticos")]]></conditionExpression>
+			<style forecolor="#01A1FE" backcolor="#3C8DBC"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="imagen" class="java.lang.String"/>
+	<parameter name="styleName" class="java.lang.String"/>
+	<parameter name="reportePie" class="java.lang.String"/>
+	<parameter name="reporteSubpie" class="java.lang.String"/>
+	<parameter name="reporteTitulo" class="java.lang.String"/>
+	<parameter name="reporteSubTitulo" class="java.lang.String"/>
+	<field name="nombreusuario" class="java.lang.String"/>
+	<field name="valorDeCuenta" class="java.math.BigDecimal"/>
+	<field name="interesResividos" class="java.math.BigDecimal"/>
+	<field name="interesesMoratorios" class="java.math.BigDecimal"/>
+	<field name="iVADelInteresMoratorio" class="java.math.BigDecimal"/>
+	<field name="comicionPorGestionCuenta" class="java.math.BigDecimal"/>
+	<field name="comicion" class="java.math.BigDecimal"/>
+	<field name="ivaComision" class="java.math.BigDecimal"/>
+	<field name="fondosAgregados" class="java.math.BigDecimal"/>
+	<field name="retiros" class="java.math.BigDecimal"/>
+	<field name="valorCuentaFinal" class="java.math.BigDecimal"/>
+	<field name="disponibleAlFinalmes" class="java.math.BigDecimal"/>
+	<field name="ganancias" class="java.math.BigDecimal"/>
+	<field name="recursosFondeados" class="java.math.BigDecimal"/>
+	<field name="pagosResividos" class="java.math.BigDecimal"/>
+	<field name="prestamosRealizados" class="java.math.BigDecimal"/>
+	<field name="comicionesPagadas" class="java.math.BigDecimal"/>
+	<field name="recursosRetirados" class="java.math.BigDecimal"/>
+	<field name="prestamosAlCorriente" class="java.math.BigDecimal"/>
+	<field name="entransito" class="java.math.BigDecimal"/>
+	<field name="atrasado" class="java.math.BigDecimal"/>
+	<field name="vencido" class="java.math.BigDecimal"/>
+	<field name="pagado" class="java.math.BigDecimal"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement style="background" mode="Transparent" x="410" y="10" width="70" height="20" forecolor="#222A45" backcolor="#222A45" uuid="513b105b-385e-499d-9180-d0d7fff948df"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="background" mode="Transparent" x="410" y="32" width="70" height="20" forecolor="#222A45" backcolor="#222A45" uuid="910fb865-882b-4f64-8ea9-117da02f855d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hora:]]></text>
+			</staticText>
+			<image>
+				<reportElement x="0" y="0" width="140" height="68" uuid="e55c8269-16aa-44aa-8f62-19e88761376a"/>
+				<imageExpression><![CDATA[$P{imagen}]]></imageExpression>
+			</image>
+			<textField pattern="MMMMM dd, yyyy">
+				<reportElement x="484" y="12" width="98" height="20" uuid="55a096da-36d8-4c77-8447-6f7e55dba87e"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH:mm">
+				<reportElement x="484" y="34" width="98" height="20" uuid="d29197f9-7b8d-4a3e-abf2-86cc8c13215b"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="140" y="14" width="270" height="66" uuid="dc427ae3-f078-43ed-9a87-f9427810b239"/>
+				<textElement textAlignment="Center">
+					<font size="26"/>
+				</textElement>
+				<text><![CDATA[Resumen de estado de cuenta ]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="28" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="433" splitType="Stretch">
+			<textField>
+				<reportElement x="120" y="50" width="100" height="20" uuid="7ea706e0-2e04-40e7-badb-eba4bcaad431"/>
+				<textFieldExpression><![CDATA[$F{nombreusuario}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="50" width="100" height="20" uuid="905ae8b5-b971-49a1-8c60-783db134fff2"/>
+				<text><![CDATA[nombreusuario]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="80" width="100" height="20" uuid="01e4234f-340c-477e-ad33-8a1fda53c984"/>
+				<textFieldExpression><![CDATA[$F{valorDeCuenta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="80" width="100" height="20" uuid="e0059f95-fcb2-4c80-861e-f767c8552089"/>
+				<text><![CDATA[valorDeCuenta]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="110" width="100" height="20" uuid="783dd9e7-09e1-41a8-9c09-6358a49eb72f"/>
+				<textFieldExpression><![CDATA[$F{interesResividos}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="110" width="100" height="20" uuid="8c926937-1e9f-42b9-b505-18f2b0f2a967"/>
+				<text><![CDATA[interesResividos]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="170" width="100" height="20" uuid="bd685130-8dba-4bf6-b9f3-3a2c73719a91"/>
+				<textFieldExpression><![CDATA[$F{iVADelInteresMoratorio}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="170" width="100" height="20" uuid="c31dd4ce-c29b-4434-a734-009e1fd3e4f8"/>
+				<text><![CDATA[iVADelInteresMoratorio]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="140" width="100" height="20" uuid="87423bcd-93ea-4788-8021-d5965683a6b7"/>
+				<textFieldExpression><![CDATA[$F{interesesMoratorios}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="140" width="100" height="20" uuid="74efc471-bfbc-4d8a-a596-670ff1222b88"/>
+				<text><![CDATA[intereses moratorios]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="200" width="100" height="20" uuid="e0a5125d-71a3-45a4-89cb-7d85ab2a1ed1"/>
+				<textFieldExpression><![CDATA[$F{comicionPorGestionCuenta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="200" width="100" height="20" uuid="befda60c-b3cc-4f49-8a1f-46449d02ca31"/>
+				<text><![CDATA[comicionPorGestionCuenta]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="230" width="100" height="20" uuid="7b9a0142-7661-45c3-abaa-eb2f16ffa386"/>
+				<textFieldExpression><![CDATA[$F{comicion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="230" width="100" height="20" uuid="f34d99b8-cf01-43b1-9e36-f0808bbdfdd2"/>
+				<text><![CDATA[comicion]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="260" width="100" height="20" uuid="630d356c-fd45-4202-9370-c678c19de24d"/>
+				<textFieldExpression><![CDATA[$F{ivaComision}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="260" width="100" height="20" uuid="4501f932-f681-4b56-958c-18fb94b39e07"/>
+				<text><![CDATA[ivaComision]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="290" width="100" height="20" uuid="6207b619-ea1d-41ae-9aab-a2036412f26e"/>
+				<textFieldExpression><![CDATA[$F{fondosAgregados}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="290" width="100" height="20" uuid="9a24f903-c8ba-4721-86b6-976fc794cf2d"/>
+				<text><![CDATA[fondosAgregados]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="320" width="100" height="20" uuid="622bfc86-9b28-47e1-b3e6-6d3e6a97dce0"/>
+				<textFieldExpression><![CDATA[$F{retiros}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="320" width="100" height="20" uuid="c5176080-2ade-46f9-a24c-8021c2df5af0"/>
+				<text><![CDATA[retiros]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="350" width="100" height="20" uuid="e93c602b-c1a9-4db4-90cd-3d4ff3664361"/>
+				<textFieldExpression><![CDATA[$F{valorCuentaFinal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="350" width="100" height="20" uuid="55e6f43c-4a02-4ab1-b11f-0e15655b1d2d"/>
+				<text><![CDATA[valorCuentaFinal]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="380" width="100" height="20" uuid="c6e3b7b9-0f78-4e48-8ae6-6de070f2be3a"/>
+				<textFieldExpression><![CDATA[$F{disponibleAlFinalmes}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="380" width="100" height="20" uuid="99d55e57-a3f8-45cc-807a-6072ffc87cd0"/>
+				<text><![CDATA[disponibleAlFinalmes]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="120" y="413" width="100" height="20" uuid="f7136492-7388-432f-ae34-ad0343972b5c"/>
+				<textFieldExpression><![CDATA[$F{ganancias}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="20" y="413" width="100" height="20" uuid="0340407d-4f00-40ec-be01-9a2ee772e02c"/>
+				<text><![CDATA[ganancias]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="390" y="50" width="100" height="20" uuid="0da4f0b1-53da-4962-b8d7-b07c3f99551c"/>
+				<textFieldExpression><![CDATA[$F{recursosFondeados}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="50" width="100" height="20" uuid="30d22c37-22b7-440f-a2fb-f4d024b68362"/>
+				<text><![CDATA[recursosFondeados]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="390" y="80" width="100" height="20" uuid="8216383f-6a95-4a5a-b830-cd7c1f288a08"/>
+				<textFieldExpression><![CDATA[$F{pagosResividos}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="80" width="100" height="20" uuid="002bfcfe-ac37-480c-85a1-e1e46805c527"/>
+				<text><![CDATA[pagosResividos]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="390" y="110" width="100" height="20" uuid="86778e13-563a-4d6e-bd7a-f13c0b5d954e"/>
+				<textFieldExpression><![CDATA[$F{prestamosRealizados}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="110" width="100" height="20" uuid="bf226824-2c21-4c47-b8dd-006b96a31ab0"/>
+				<text><![CDATA[prestamosRealizados]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="390" y="140" width="100" height="20" uuid="200136eb-3282-41d9-ad3b-9772af93fe37"/>
+				<textFieldExpression><![CDATA[$F{comicionesPagadas}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="140" width="100" height="20" uuid="4721abc3-1e7d-4b8f-8c16-679f614eb265"/>
+				<text><![CDATA[comicionesPagadas]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="390" y="170" width="100" height="20" uuid="c9a7c4b5-40b1-4629-94d8-ec5674f04601"/>
+				<textFieldExpression><![CDATA[$F{recursosRetirados}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="170" width="100" height="20" uuid="85073308-85d3-465d-9b28-29bdb0a7527e"/>
+				<text><![CDATA[recursosRetirados]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="390" y="250" width="100" height="20" uuid="47323d76-7251-46fb-ab1f-9f025f0cb30f"/>
+				<textFieldExpression><![CDATA[$F{prestamosAlCorriente}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="250" width="100" height="20" uuid="8c735792-5dac-46bc-bb4d-b41fa042c9bd"/>
+				<text><![CDATA[prestamosAlCorriente]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="390" y="280" width="100" height="20" uuid="e4d16e0d-3ddc-45f0-b9d1-486765b37139"/>
+				<textFieldExpression><![CDATA[$F{entransito}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="280" width="100" height="20" uuid="f10f5542-2c8e-4080-94ad-1779c033ce43"/>
+				<text><![CDATA[entransito]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="390" y="310" width="100" height="20" uuid="955617f6-4621-4b97-86c4-3cd8504318bf"/>
+				<textFieldExpression><![CDATA[$F{atrasado}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="310" width="100" height="20" uuid="1f52bc32-77d4-4f48-81fd-92b313f5ec74"/>
+				<text><![CDATA[atrasado]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="390" y="340" width="100" height="20" uuid="e9890040-bd92-490f-90ac-be9656c4b2e5"/>
+				<textFieldExpression><![CDATA[$F{vencido}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="340" width="100" height="20" uuid="480634f6-6cca-43af-9c5e-5a555bb37033"/>
+				<text><![CDATA[vencido]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="390" y="370" width="100" height="20" uuid="43f30508-72a1-4caa-af39-fb14455a0983"/>
+				<textFieldExpression><![CDATA[$F{vencido}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="370" width="100" height="20" uuid="33736cde-b9ec-4fd9-8932-aa57c0a63120"/>
+				<text><![CDATA[vencido]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="390" y="400" width="100" height="20" uuid="16c7040a-a2ab-4b63-b78f-9679b81807b0"/>
+				<textFieldExpression><![CDATA[$F{pagado}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="290" y="400" width="100" height="20" uuid="8c1bfc16-f8c2-47bb-b203-4f1671d50152"/>
+				<text><![CDATA[pagado]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

@@ -1,0 +1,7 @@
+import mx.saccsa.Crowdlending.SolicitudPrestamo
+
+model {
+	SolicitudPrestamo solicitudPrestamo
+}
+
+json tmpl.solicitudPrestamo(solicitudPrestamo)

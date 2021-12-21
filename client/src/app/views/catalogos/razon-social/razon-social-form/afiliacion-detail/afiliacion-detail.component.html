@@ -1,0 +1,65 @@
+<div>
+
+  <div class="row">
+    <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 font-weight-bold font-17">
+      Datos del Afiliado <b>#: {{data.datos.id}}</b>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+        <p><span class="font-weight-bold">Nombre</span></p>
+      </div>
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+        <p>{{data.datos.nombre ? data.datos.nombre : 'N/A'}}</p>
+      </div>
+    </div>
+    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+        <p><span class="font-weight-bold">Apellido Paterno</span></p>
+      </div>
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+        <p>{{data.datos.apellidoPaterno ? data.datos.apellidoPaterno : 'N/A'}}</p>
+      </div>
+    </div>
+    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+        <p><span class="font-weight-bold">Apellido Materno</span></p>
+      </div>
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+        <p>{{data.datos.apellidoMaterno ? data.datos.apellidoMaterno : 'N/A'}}</p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+        <p><span class="font-weight-bold">Género</span></p>
+      </div>
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+        <p>{{data.datos.sexo ? data.datos.sexo : 'N/A'}}</p>
+      </div>
+    </div>
+    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+        <p><span class="font-weight-bold">CURP</span></p>
+      </div>
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+        <p>{{data.datos.curp ? data.datos.curp : 'N/A'}}</p>
+      </div>
+    </div>
+    <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 mb-2">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+        <p><span class="font-weight-bold">RFC</span></p>
+      </div>
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+        <p>{{data.datos.rfc ? data.datos.rfc : 'N/A'}}</p>
+      </div>
+    </div>
+  </div>
+
+
+  <mat-dialog-actions align="center">
+    <button mat-button class="btn-primary" mat-dialog-close>Aceptar</button>
+  </mat-dialog-actions>
+</div>

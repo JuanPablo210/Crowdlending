@@ -1,0 +1,109 @@
+<div class="addContainer">
+  <div class="modalHeader">
+    <div class="editRowModal">
+      <div class="modalHeader clearfix">
+        <div class="modal-about">
+          <div class="font-weight-bold p-t-5 p-l-10 font-17">
+            Prestar efectivo </div>
+        </div>
+      </div>
+    </div>
+    <button mat-icon-button (click)="dialogRef.close()" aria-label="Close dialog">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div mat-dialog-content>
+    <form class="register-form m-4" [formGroup]="_PrestarEfectivo" (ngSubmit)="submit">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Folio</mat-label>
+            <input matInput formControlName="id" readonly>
+            <mat-icon matSuffix>turned_in_not</mat-icon>
+            <mat-error *ngIf="_PrestarEfectivo.get('id').hasError('required')">
+              Folio es requerido
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+           <mat-form-field class="example-full-width" appearance="outline">
+             <mat-label>¿cuantas veces al mes piensa agragar fondos?</mat-label>
+             <mat-select formControlName="fondosMes">
+               <mat-option value="1-5">1 a 5</mat-option>
+               <mat-option value="6-10">5 a 10</mat-option>
+               <mat-option value="10+">mas de 10</mat-option>
+                </mat-select>
+                <mat-error *ngIf="_PrestarEfectivo.get('fondosMes').hasError('required')">
+               Meses a pagar es requerido
+             </mat-error>
+           </mat-form-field>
+         </div>
+         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <mat-form-field class="example-full-width" appearance="outline">
+            <mat-label>monto de cada deposito</mat-label>
+               <mat-select formControlName="montoDeposito">
+                <mat-option value="0-10,000">$0 a $10,000</mat-option>
+                <mat-option value="10,000-50,000">$10,000 a $50,000</mat-option>
+                <mat-option value="50,000-100,000">$50,000 a $100,000</mat-option>
+                <mat-option value="100,000+">mas de $100,000</mat-option>
+               </mat-select>
+               <mat-error *ngIf="_PrestarEfectivo.get('montoDeposito').hasError('required')">
+              Meses a pagar es requerido
+            </mat-error>
+           </mat-form-field>
+         </div>
+         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+           <mat-form-field class="example-full-width" appearance="outline">
+             <mat-label>¿cual es el origen de los recursos</mat-label>
+             <mat-select formControlName="origenRecursos">
+               <mat-option value="Sueldo">Sueldo</mat-option>
+               <mat-option value="negocio">negocio</mat-option>
+               <mat-option value="Herencia">Herencia</mat-option>
+               <mat-option value="Donacion Familiar">Donacion Familiar</mat-option>
+               <mat-option value="otros">otros</mat-option>
+             </mat-select>
+             <mat-error *ngIf="_PrestarEfectivo.get('origenRecursos').hasError('required')">
+               Meses a pagar es requerido
+             </mat-error>
+           </mat-form-field>
+         </div>
+         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+           <mat-form-field class="example-full-width" appearance="outline">
+             <mat-label>¿que destino le dara a su inversion?</mat-label>
+             <mat-select formControlName="destinoInversion">
+               <mat-option value="Ahorro o inversion">Ahorro o inversion</mat-option>
+               <mat-option value="Ahorro para el retiro">Ahorro para el retiro</mat-option>
+               <mat-option value="Adquirir un bien">Adquirir un bien</mat-option>
+               <mat-option value="Otro">Otro</mat-option>
+             </mat-select>
+             <mat-error *ngIf="_PrestarEfectivo.get('destinoInversion').hasError('required')">
+               Meses a pagar es requerido
+             </mat-error>
+           </mat-form-field>
+         </div>
+         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+           <mat-form-field class="full-width" appearance="outline">
+             <mat-label>¿cual es la razon para operar en Saccsa</mat-label>
+             <input matInput formControlName="detalleprestar">
+             <mat-error *ngIf="_PrestarEfectivo.get('detalleprestar').hasError('required')">
+               cantidad Dinero es requerida.
+             </mat-error>
+           </mat-form-field>
+         </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
+          <div class="example-button-row">
+            <button mat-raised-button color="primary" [type]="submit" [disabled]="_PrestarEfectivo.valid"
+                    [mat-dialog-close]="1" (click)="confirmAdd()">Guardar</button>
+            <button mat-raised-button color="warn" (click)="onNoClick()" tabindex="-1">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+
